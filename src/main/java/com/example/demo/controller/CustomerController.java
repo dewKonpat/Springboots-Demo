@@ -13,24 +13,25 @@ import com.example.demo.services.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
-public class UserController {
+public class CustomerController extends Controller {
 
 	@Autowired
 	private CustomerService customerService;
 	
-	@PostMapping("/order")
+	@PostMapping
 	public ResponseEntity<Object> addOrder(@Validated @RequestBody CustomerRequestModel userModel) {
 		
 		customerService.addOrder(userModel);
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("success");
 	}
 	
 	@PostMapping("/exception")
-	public void getException(@RequestBody CustomerRequestModel userModel) throws Exception {
+	public  ResponseEntity<Object> getException(@RequestBody CustomerRequestModel userModel) throws Exception {
 		
 		customerService.validateUser(userModel);
 		
+		return ResponseEntity.ok("success");
 	}
 	
 }
